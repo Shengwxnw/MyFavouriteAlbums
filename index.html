@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>My Favourite Albums</title>
+    <style>
+      h1 {
+        width: 390px;
+        background-color: black;
+        color: white;
+      }
+      #heart {
+        position: relative;
+        display: flex;
+      }
+      .sb {
+        position: absolute;
+        height: 100px;
+        width: 100px;
+        border: 2px solid black;
+      }
+      .bb {
+        position: absolute;
+        height: 200px;
+        width: 200px;
+        border: 2px solid black;
+      }
+      #b1 {
+        left: 110px;
+      }
+      #b2 {
+        left: 220px;
+      }
+      #b3 {
+        left: 450px;
+      }
+      #b4 {
+        top: 110px;
+        left: 15px;
+      }
+      #b5 {
+        top: 220px;
+        left: 15px;
+      }
+      #b6 {
+        top: 112.5px;
+        left: 125px;
+      }
+      #b7 {
+        top: 110px;
+        left: 337px;
+      }
+      #b8 {
+        top: 220px;
+        left: 337px;
+      }
+      #b9 {
+        top: 110px;
+        left: 662px;
+      }
+      #b10 {
+        top: 220px;
+        left: 662px;
+      }
+      #b11 {
+        left: 450px;
+        top: 220px;
+      }
+      #b12 {
+        left: 127px;
+        top: 330px;
+      }
+      #b13 {
+        top: 330px;
+        left: 237px;
+      }
+      #b14 {
+        left: 450px;
+        top: 430px;
+      }
+      #b15 {
+        left: 337px;
+        top: 542px;
+      }
+      #fileInput {
+        display: none;
+      }
+      .sb, .bb {
+  background-size: cover;       /* 让背景图填满容器，裁剪多余部分 */
+  background-position: center;  /* 居中显示 */
+  background-repeat: no-repeat; /* 不重复铺图 */
+}
+
+    </style>
+  </head>
+  <body>
+    <center>
+      <h1>My Favourite Albums</h1>
+    </center>
+    <div id="heart">
+      <div class="sb" id="b1"></div>
+      <div class="sb" id="b2"></div>
+      <div class="bb" id="b3"></div>
+      <div class="sb" id="b4"></div>
+      <div class="sb" id="b5"></div>
+      <div class="bb" id="b6"></div>
+      <div class="sb" id="b7"></div>
+      <div class="sb" id="b8"></div>
+      <div class="sb" id="b9"></div>
+      <div class="sb" id="b10"></div>
+      <div class="bb" id="b11"></div>
+      <div class="sb" id="b12"></div>
+      <div class="bb" id="b13"></div>
+      <div class="sb" id="b14"></div>
+      <div class="sb" id="b15"></div>
+      <input type="file" accept="image/*" id="fileInput" />
+    </div>
+    <script>
+      const fileInput = document.getElementById("fileInput");
+      let currentBox = null;
+
+      // 给所有 .imageBox 添加点击事件
+      document.querySelectorAll(".sb").forEach((box) => {
+        box.addEventListener("click", () => {
+          currentBox = box;
+          fileInput.click(); // 打开文件选择
+        });
+      });
+      document.querySelectorAll(".bb").forEach((box) => {
+        box.addEventListener("click", () => {
+          currentBox = box;
+          fileInput.click(); // 打开文件选择
+        });
+      });
+
+      fileInput.addEventListener("change", () => {
+        const file = fileInput.files[0];
+        if (file && file.type.startsWith("image/")) {
+          const reader = new FileReader();
+          reader.onload = function (e) {
+            currentBox.style.backgroundImage = `url(${e.target.result})`;
+            currentBox.textContent = "";
+          };
+          reader.readAsDataURL(file);
+        }
+      });
+    </script>
+  </body>
+</html>
